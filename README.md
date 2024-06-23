@@ -32,7 +32,7 @@ This project implements the Game of Nim using a Python class that defines the ga
 ### Running the Game
 
 **Run this line of command in terminal**
-/usr/bin/python3 game_of_nim.py
+- /usr/bin/python3 game_of_nim.py
 
 
 ### Example Gameplay: 
