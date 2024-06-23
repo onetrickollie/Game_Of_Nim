@@ -1,6 +1,6 @@
 # Author: 
-Kaixiang Liu
-Jahn Tibayan
+Kaixiang Liu, 
+Jahn Tibayan, 
 Jacob Sean Evasco
 
 
