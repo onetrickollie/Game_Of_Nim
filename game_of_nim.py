@@ -1,14 +1,17 @@
-# File: game_of_nim.py
+# Kaixiang Liu, Jahn Tibayan ,Jacob Sean Evasco
+# CPSC 481 - 02
+# Instructor: Dr. Panangadan
 
 from games import Game, GameState
 
 class GameOfNim(Game):
+    # Initialize game board
     def __init__(self, initial):
         if isinstance(initial, list):
             moves = self.actions_from_board(initial)
             initial = GameState(to_move='MAX', utility=0, board=initial, moves=moves)
         self.initial = initial
-
+    # function to determine actions
     def actions_from_board(self, board):
         moves = []
         for r, count in enumerate(board):
@@ -18,6 +21,7 @@ class GameOfNim(Game):
     def actions(self, state):
         return state.moves
     
+    # Function to determine results after each move
     def result(self, state, move):
         r, n = move
         new_board = state.board[:]
