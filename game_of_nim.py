@@ -9,7 +9,7 @@ class GameOfNim(Game):
     def __init__(self, initial):
         if isinstance(initial, list):
             moves = self.actions_from_board(initial)
-            initial = GameState(to_move='MAX', utility=0, board=initial, moves=moves)
+            initial = GameState(to_move='MIN', utility=0, board=initial, moves=moves)
         self.initial = initial
     # function to determine actions
     def actions_from_board(self, board):
@@ -34,9 +34,13 @@ class GameOfNim(Game):
             moves=new_moves
         )
     
+    # Function to determine if the game ended
+    # If board sum == 0, no more moves on the board
     def terminal_test(self, state):
         return sum(state.board) == 0
     
+    # Function to determine the current state of a player
+    # Using +/- as a switch
     def utility(self, state, player):
         return state.utility if player == 'MAX' else -state.utility
     
@@ -46,20 +50,29 @@ class GameOfNim(Game):
         return 0
 
 # Example main function to test the game
+# Change the board here for other tests
 if __name__ == '__main__':
     nim_game = GameOfNim([7, 5, 3, 1])
     state = nim_game.initial
+    
+    # Picking the first available moves
+    computer_move = nim_game.actions(state)[0]  
+    state = nim_game.result(state,computer_move)
+    print(f"Computer move: {computer_move}")
+    print("New board:", state.board)
 
     while not nim_game.terminal_test(state):
-        print("board:", state.board)
-        move = input("Your move? (format: r,n): ")
+        print("current state: board:", state.board)
+        print("available moves:", nim_game.actions(state))
+
+        move = input("Your move? ")
         r, n = map(int, move.split(','))
         state = nim_game.result(state, (r, n))
         print(f"Move: ({r}, {n})")
         print("New board:", state.board)
         if nim_game.terminal_test(state):
             break
-        computer_move = nim_game.actions(state)[0]  # Simplified: just pick the first available move
+        computer_move = nim_game.actions(state)[0]
         state = nim_game.result(state, computer_move)
         print(f"Computer move: {computer_move}")
         print("New board:", state.board)
